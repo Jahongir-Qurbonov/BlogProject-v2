@@ -32,7 +32,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # 
         obj = self.get_object()
         return obj.author == self.request.user
 
-class ArticleCreateView(LoginRequiredMixin, CreateView): # new
+class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView): # new
     model = Article
     template_name = 'article_new.html'
     fields = ('title', 'body')
@@ -40,3 +40,6 @@ class ArticleCreateView(LoginRequiredMixin, CreateView): # new
     def form_valid(self, form): # new
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        return self.request.user.is_superuser
