@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     # 3rd Party
     'crispy_forms',
 
+    # ckeditor for articles
+    'ckeditor',
+
     # Local
     'accounts',
     'pages',
