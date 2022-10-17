@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # ckeditor for articles
     'ckeditor',
+    'ckeditor_uploader',
 
     # Local
     'accounts',
@@ -68,6 +69,8 @@ EMAIL_HOST_PASSWORD = 'blabla'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+
+AUTH_USER_MODEL = 'accounts.CustomUser' # new
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -150,12 +153,27 @@ STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
 STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # new
 
+
+# Media files
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
-
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+# ckeditor settings
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+    }
+}
+
+# ckeditor upload settings
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_RESTRICT_BY_USER = True
